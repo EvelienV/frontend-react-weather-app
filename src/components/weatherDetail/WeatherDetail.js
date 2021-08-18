@@ -1,14 +1,22 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {TempContext} from "../../context/TempProvider";
 import './WeatherDetail.css';
+import setWeatherIcon from "../../helpers/iconMapper";
 
-function WeatherDetail() {
+function WeatherDetail({
+                         description,
+                         temp,
+                         type,
+                       }) {
+  const {kelvinToMetric} = useContext(TempContext);
+
   return (
     <section className="day-part">
       <span className="icon-wrapper">
-        *Icoontje van het weer*
+        {setWeatherIcon(type)}
       </span>
-      <p className="description">Zonnig</p>
-      <p>13&deg; C</p>
+      <p className="description">{description}</p>
+      <p>{kelvinToMetric(temp)}</p>
     </section>
   );
 };
